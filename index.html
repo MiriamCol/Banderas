@@ -9,67 +9,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-    function generar_banderas()
-    {
 
-        fetch('https://flagcdn.com/es/codes.json')
-            .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            bandera(data);
-        })
-        .catch(function (err) {
-            console.log('error: ' + err);
-        });
-
-    }
-    function bandera(data)
-    {
-
-        var img = document.createElement("img");
-        data_valores = Object.values(data);
-        data_claves= Object.keys(data);
-        let numero= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
-        let text1= "https://flagcdn.com/w320/";
-        let text3= text1.concat(data_claves[numero]);
-        let text4=text3.concat(".png");
-        img.src = text4;
-        var block = document.getElementById("x");
-        block.appendChild(img);
-
-        for (i = 0; i < document.opciones.opcion.length; i++)
-        {
-            if (document.opciones.opcion[1].checked) {
-                alert("hola");
- 		}
-   	}
-
-
-    }
-
-
-
-    function ocultar(id){
-        var elemento = document.getElementById(id);
-        elemento.style.display = "none";
-    }
-    function mostrar(id)
-
-    {
-            var objeto=document.getElementById(id)
-            if(objeto.style.display=="block")
-                objeto.style.display="none";
-            else
-                objeto.style.display="block";
-
-    }
-
-
-
-
-    </script>
 </head>
 <body>
 
@@ -89,32 +29,91 @@
             <button type="button" class="btn btn-warning btn-lg" value="Ocultar" onclick="ocultar('grupo1')">EMPEZAR</button>
         </div>
         -->
+
+
+        <button type="button" class="btn btn-warning btn-lg" onclick="generar_banderas()" >SIGUIENTE</button>
+
+
+        <img id="bandera">
+
+        <br><br><br>
+
+        <p id="x"></p>
+
         <form name=opciones>
-            <input type="Radio" name="opcion" value="ffffff" checked> Blanco
+            <input type="Radio" name="opcion" value="ffffff"> Opcion 1
             <br>
-            <input type="Radio" name="opcion" value="ff0000"> Rojo
+            <input type="Radio" name="opcion" value="ff0000"> Opcion 2
             <br>
-            <input type="Radio" name="opcion" value="00ff00"> Verde
+            <input type="Radio" name="opcion" value="00ff00"> Opcion 3
+            <br>
+            <input type="Radio" name="opcion" value="ffffff"> Opcion 4
             <br>
         </form>
 
-        <button type="button" class="btn btn-warning btn-lg" onclick="generar_banderas()" >SIGUIENTE</button>
-        <button type="button" class="btn btn-warning btn-lg" onclick="eliminar()">DALE</button>
-
-
-        <br><br><br>
-        <p id="x"></p>
-
-
+        <p id="demo"></p>
 
 
     </div>
 
+    <script>
+    function generar_banderas()
+    {
+
+        fetch('https://flagcdn.com/es/codes.json')
+            .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+           bandera(data);
+
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+
+
+    }
+
+    function bandera(data)
+    {
+
+        var img = document.getElementById("bandera");
+        data_valores = Object.values(data);
+        data_claves= Object.keys(data);
+        let numero= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
+        let numero2= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
+        let numero3= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
+        let numero4= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
+        let text1= "https://flagcdn.com/w320/";
+        let text3= text1.concat(data_claves[numero]);
+        let text4=text3.concat(".png");
+        img.src = text4;
+        var block = document.getElementById("x");
+        block.appendChild(img);
+
+        for (i = 0; i < document.opciones.opcion.length; i++)
+        {
+
+            if (document.opciones.opcion[0].checked) {
+
+                alert("correcto");
+            }
+ 		}
+
+ 		let opcion1=data_valores[numero];
+ 		//document.write(opcion1);
+ 		let opcion2=data_valores[numero2];
+ 		let opcion3=data_valores[numero3];
+ 		let opcion4=data_valores[numero4];
+ 		//alert(opcion1);
+        document.getElementById("demo").innerHTML = opcion1;
+
+   	}
+   	//document.getElementById("opciones_posibles").innerHTML = generar_banderas();
 
 
 
-
-
-
+    </script>
 </body>
 </html>
