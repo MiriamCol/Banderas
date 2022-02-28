@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego banderas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    function generar_banderas()
+    {
+
+        fetch('https://flagcdn.com/es/codes.json')
+            .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            bandera(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+
+    }
+    function bandera(data)
+    {
+
+        var img = document.createElement("img");
+        data_valores = Object.values(data);
+        data_claves= Object.keys(data);
+        let numero= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
+        let text1= "https://flagcdn.com/w320/";
+        let text3= text1.concat(data_claves[numero]);
+        let text4=text3.concat(".png");
+        img.src = text4;
+        var block = document.getElementById("x");
+        block.appendChild(img);
+
+        for (i = 0; i < document.opciones.opcion.length; i++)
+        {
+            if (document.opciones.opcion[1].checked) {
+                alert("hola");
+ 		}
+   	}
+
+
+    }
+
+
+
+    function ocultar(id){
+        var elemento = document.getElementById(id);
+        elemento.style.display = "none";
+    }
+    function mostrar(id)
+
+    {
+            var objeto=document.getElementById(id)
+            if(objeto.style.display=="block")
+                objeto.style.display="none";
+            else
+                objeto.style.display="block";
+
+    }
+
+
+
+
+    </script>
+</head>
+<body>
+
+    <div align='center'>
+        <h1>BANDERAS DEL MUNDO</h1>
+    </div>
+    <div align='center'>
+        <h3>¿A qué país pertenece esta bandera?</h3>
+    </div>
+
+
+
+
+    <div align='center'>
+        <!--
+        <div id="grupo1">
+            <button type="button" class="btn btn-warning btn-lg" value="Ocultar" onclick="ocultar('grupo1')">EMPEZAR</button>
+        </div>
+        -->
+        <form name=opciones>
+            <input type="Radio" name="opcion" value="ffffff" checked> Blanco
+            <br>
+            <input type="Radio" name="opcion" value="ff0000"> Rojo
+            <br>
+            <input type="Radio" name="opcion" value="00ff00"> Verde
+            <br>
+        </form>
+
+        <button type="button" class="btn btn-warning btn-lg" onclick="generar_banderas()" >SIGUIENTE</button>
+        <button type="button" class="btn btn-warning btn-lg" onclick="eliminar()">DALE</button>
+
+
+        <br><br><br>
+        <p id="x"></p>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+</body>
+</html>
