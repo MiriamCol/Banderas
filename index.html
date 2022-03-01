@@ -31,7 +31,8 @@
         -->
 
 
-        <button type="button" class="btn btn-warning btn-lg" onclick="generar_banderas()" >SIGUIENTE</button>
+        <button type="button" class="btn btn-warning btn-lg" onclick="generar_banderas()" >EMPEZAR</button>
+
 
 
         <img id="bandera">
@@ -42,13 +43,13 @@
 
 
         <form name=opciones>
-            <input  type="Radio" id="opc1" name="opcion" value="ffffff"><label id="demo1"></label>
+            <input  type="Radio" onclick="comprobar()" id="opc0" name="opcion" value="ffffff"><label id="demo0"></label>
             <br>
-            <input type="Radio" id="opc2" name="opcion" value="ff0000"><label id="demo2"></label>
+            <input type="Radio" onclick="comprobar()"  id="opc1" name="opcion" value="ff0000"><label id="demo1"></label>
             <br>
-            <input type="Radio" id="opc3" name="opcion" value="00ff00"><label id="demo3"></label>
+            <input type="Radio" onclick="comprobar()" id="opc2" name="opcion" value="00ff00"><label id="demo2"></label>
             <br>
-            <input type="Radio" id="opc4" name="opcion" value="ffffff"><label id="demo4"></label>
+            <input type="Radio" onclick="comprobar()" id="opc3" name="opcion" value="ffffff"><label id="demo3"></label>
             <br>
         </form>
 
@@ -76,6 +77,7 @@
     </div>
 
     <script>
+    id_importante=0;
     function generar_banderas()
     {
 
@@ -101,6 +103,7 @@
         data_valores = Object.values(data);
         data_claves= Object.keys(data);
         let numero= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
+        let numero1= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
         let numero2= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
         let numero3= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
         let numero4= Math.floor(Math.random() * (254 - 1 + 1)) + 1;
@@ -111,39 +114,51 @@
         var block = document.getElementById("x");
         block.appendChild(img);
 
-
         let opcs = ['opc0', 'opc1','opc2','opc3'];
         numero_aleatorio= Math.floor(Math.random() * 4);
         let id_correcto=opcs[numero_aleatorio];
+        id_importante=id_correcto;
 
-        let opcion0=data_valores[numero]; //la correcta
+        let opcion0=data_valores[numero1];
  		let opcion1=data_valores[numero2];
  		let opcion2=data_valores[numero3];
  		let opcion3=data_valores[numero4];
 
- 		let opciones=[opcion0, opcion1,opcion2,opcion3];
- 		let pais_correcto=opcion0;
+ 		let opciones=[opcion0,opcion1,opcion2,opcion3];
+ 		let pais_correcto=data_valores[numero]; //la correcta
  		opciones[numero_aleatorio]=pais_correcto;
 
 
 
-        for(let j=0; j<opciones.length;j++)
-        {
-            if (document.getElementById(id_correcto).checked)
-            {
-                alert("correcto");
-                break;
-            }
-
-        }
-
-        document.getElementById("demo1").innerHTML = opciones[0];
-        document.getElementById("demo2").innerHTML = opciones[1];
-        document.getElementById("demo3").innerHTML = opciones[2];
-        document.getElementById("demo4").innerHTML = opciones[3];
-
+        document.getElementById("demo0").innerHTML = opciones[0];
+        document.getElementById("demo1").innerHTML = opciones[1];
+        document.getElementById("demo2").innerHTML = opciones[2];
+        document.getElementById("demo3").innerHTML = opciones[3];
 
    	}
+
+
+
+
+
+   	function comprobar()
+   	{
+   	     if (document.getElementById(id_importante).checked)
+        {
+            generar_banderas();
+        }
+        else
+        {
+            alert("incorrecto");
+            generar_banderas();
+
+        }
+   	}
+
+
+
+
+
    	function change(id)
     {
         var elem = document.getElementById(id);
@@ -155,7 +170,6 @@
         {
             elem.style.background='#ee1d1d';
         }
-
 
     }
 
