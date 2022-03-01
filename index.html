@@ -40,19 +40,38 @@
 
         <p id="x"></p>
 
+
         <form name=opciones>
-            <input type="Radio" name="opcion" value="ffffff"> Opcion 1
+            <input  type="Radio" id="opc1" name="opcion" value="ffffff"><label id="demo1"></label>
             <br>
-            <input type="Radio" name="opcion" value="ff0000"> Opcion 2
+            <input type="Radio" id="opc2" name="opcion" value="ff0000"><label id="demo2"></label>
             <br>
-            <input type="Radio" name="opcion" value="00ff00"> Opcion 3
+            <input type="Radio" id="opc3" name="opcion" value="00ff00"><label id="demo3"></label>
             <br>
-            <input type="Radio" name="opcion" value="ffffff"> Opcion 4
+            <input type="Radio" id="opc4" name="opcion" value="ffffff"><label id="demo4"></label>
             <br>
         </form>
 
-        <p id="demo"></p>
+        <!--
+        <button id="1" onClick="reply_click(this.id)">B1</button>
+        <br>
+        <button id="2" onClick="reply_click(this.id)">B2</button>
+        <br>
+        <button id="3" onClick="reply_click(this.id)">B3</button>
+        <br>
+        <button id="4" onClick="reply_click(this.id)">B3</button>
+        <br>
 
+
+        <input onclick="change(id)" type="button" value="Open Curtain" id="myButton1">
+        <br>
+        <input onclick="change(id)" type="button" value="Open Curtain" id="myButton2">
+        <br>
+        <input onclick="change(id)" type="button" value="Open Curtain" id="myButton3">
+        <br>
+        <input onclick="change(id)" type="button" value="Open Curtain" id="myButton4">
+        <br>
+        -->
 
     </div>
 
@@ -92,25 +111,53 @@
         var block = document.getElementById("x");
         block.appendChild(img);
 
-        for (i = 0; i < document.opciones.opcion.length; i++)
+
+        let opcs = ['opc0', 'opc1','opc2','opc3'];
+        numero_aleatorio= Math.floor(Math.random() * 4);
+        let id_correcto=opcs[numero_aleatorio];
+
+        let opcion0=data_valores[numero]; //la correcta
+ 		let opcion1=data_valores[numero2];
+ 		let opcion2=data_valores[numero3];
+ 		let opcion3=data_valores[numero4];
+
+ 		let opciones=[opcion0, opcion1,opcion2,opcion3];
+ 		let pais_correcto=opcion0;
+ 		opciones[numero_aleatorio]=pais_correcto;
+
+
+
+        for(let j=0; j<opciones.length;j++)
         {
-
-            if (document.opciones.opcion[0].checked) {
-
+            if (document.getElementById(id_correcto).checked)
+            {
                 alert("correcto");
+                break;
             }
- 		}
 
- 		let opcion1=data_valores[numero];
- 		//document.write(opcion1);
- 		let opcion2=data_valores[numero2];
- 		let opcion3=data_valores[numero3];
- 		let opcion4=data_valores[numero4];
- 		//alert(opcion1);
-        document.getElementById("demo").innerHTML = opcion1;
+        }
+
+        document.getElementById("demo1").innerHTML = opciones[0];
+        document.getElementById("demo2").innerHTML = opciones[1];
+        document.getElementById("demo3").innerHTML = opciones[2];
+        document.getElementById("demo4").innerHTML = opciones[3];
+
 
    	}
-   	//document.getElementById("opciones_posibles").innerHTML = generar_banderas();
+   	function change(id)
+    {
+        var elem = document.getElementById(id);
+        if (elem.value=="OpenCurtain")
+        {
+             elem.style.background='#74E555';
+        }
+        else
+        {
+            elem.style.background='#ee1d1d';
+        }
+
+
+    }
 
 
 
