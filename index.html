@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
-<body>
+<body style="background-image: url('https://miriamcol.github.io/Banderas/Resources/mundo.jpg');opacity: 0.5;>
 
     <div align='center'>
         <h1>BANDERAS DEL MUNDO</h1>
@@ -33,25 +33,28 @@
 
         <button type="button" class="btn btn-warning btn-lg" onclick="generar_banderas()" >EMPEZAR</button>
 
-
+        <br><br><br>
 
         <img id="bandera">
-
-        <br><br><br>
 
         <p id="x"></p>
 
 
         <form name=opciones>
-            <input  type="Radio" onclick="comprobar()" id="opc0" name="opcion" value="ffffff"><label id="demo0"></label>
+            <input  type="Radio" onclick="comprobar()" id="opc0" name="opcion"><label id="demo0"></label>
             <br>
-            <input type="Radio" onclick="comprobar()"  id="opc1" name="opcion" value="ff0000"><label id="demo1"></label>
+            <input type="Radio" onclick="comprobar()"  id="opc1" name="opcion"><label id="demo1"></label>
             <br>
-            <input type="Radio" onclick="comprobar()" id="opc2" name="opcion" value="00ff00"><label id="demo2"></label>
+            <input type="Radio" onclick="comprobar()" id="opc2" name="opcion"><label id="demo2"></label>
             <br>
-            <input type="Radio" onclick="comprobar()" id="opc3" name="opcion" value="ffffff"><label id="demo3"></label>
+            <input type="Radio" onclick="comprobar()" id="opc3" name="opcion"><label id="demo3"></label>
             <br>
         </form>
+
+        <br><br>
+        CORRECTAS: <label id="cont_correcto"></label><br>
+        INCORRECTAS: <label id="cont_incorrecto"></label>
+
 
         <!--
         <button id="1" onClick="reply_click(this.id)">B1</button>
@@ -138,21 +141,50 @@
    	}
 
 
-
-
-
    	function comprobar()
    	{
    	     if (document.getElementById(id_importante).checked)
         {
             generar_banderas();
+            actualizarContador("correcto");
+            document.getElementById(id_importante).checked=0;
+
         }
         else
         {
-            alert("incorrecto");
             generar_banderas();
+            actualizarContador("incorrecto");
+            document.getElementById(id_importante).checked=0;
 
         }
+   	}
+   	let contador_correcto=0;
+   	let contador_incorrecto=0;
+
+   	function actualizarContador(acierto_fallo)
+   	{
+
+        if(acierto_fallo=="correcto")
+        {
+            contador_correcto=contador_correcto+1;
+            document.getElementById("cont_correcto").innerHTML = contador_correcto;
+
+        }
+        if(acierto_fallo=="incorrecto")
+        {
+            contador_incorrecto=contador_incorrecto+1;
+            document.getElementById("cont_incorrecto").innerHTML = contador_incorrecto;
+
+        }
+        if(contador_correcto==0)
+        {
+            document.getElementById("cont_correcto").innerHTML = 0;
+        }
+        if(contador_incorrecto==0)
+        {
+            document.getElementById("cont_incorrecto").innerHTML = 0;
+        }
+
    	}
 
 
